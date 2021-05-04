@@ -1,0 +1,29 @@
+<%=  provide(:title, 'Index') %>
+<div class=" container-fiuld room-posts">
+  <h3 class="ppp">予約一覧</h3>
+  <div class="user-items">
+    <table>
+      <tr>
+        <th>写真</th>
+        <th>ルーム名</th>
+        <th>部屋紹介</th>
+        <th>合計金額</th>
+        <th>予約日</th>
+        <th>終了日</th>
+        <th colspan="3"></th>
+      </tr>
+      <tbody>
+        <% current_user.reservations.each do |reservation| %>
+          <tr>
+            <td><img src="<%= reservation.room_img %>" class="room-post-image" alt="部屋画像"></td>
+            <td><%= link_to reservation.room_name, "/rooms/#{reservation.room_id}" %></td>
+            <td><%= reservation.room_body %></td>
+            <td>¥<%= reservation.total_price %></td>
+            <td><%= reservation.start_date.strftime('%F') %></td>
+            <td><%= reservation.end_date.strftime('%F') %></td>
+          </tr>
+        <% end %>
+      </tr>
+    </table>
+  </div>
+</div>

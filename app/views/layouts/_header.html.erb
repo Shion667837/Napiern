@@ -1,10 +1,46 @@
-<header>
+<header class="navbar-inverse">
   <div class="container">
     <%= link_to "TravelApp", root_path, id: "logo" %>
     <nav>
-      <ul>
-        <li class="btn1"><%= link_to "ログイン", '#' %></li>
-        <li class="btn2"><%= link_to "登録する", signup_path %></li>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="search-form">
+          <%= search_form_for @search, url: rooms_search_path do |f| %>
+            <% f.label :place, "エリア" %>
+            <%= f.search_field :place_cont, placeholder: "エリア" %>
+            <% f.submit "検索" %>
+          <% end %>
+        </li>
+        <li class="search-form">
+          <%= search_form_for @search, url: rooms_search_path do |f| %>
+            <% f.label :name %>
+            <%= f.search_field :name_or_body_cont, placeholder: "キーワード" %>
+            <% f.submit %>
+          <% end %>
+        </li>
+        <% if logged_in? %>
+          <ul id="navigation">
+            <li><%= @current_user.name %></li>
+            <li>
+              <a href="#">
+                <% if @current_user.image_name? %>
+                  <%= image_tag @current_user.image_name.url %>
+                <% else %>
+                  <%= image_tag "/user_images/default.png" %>
+                <% end %>
+              </a>
+              <ul>
+                <li><%= link_to "ルーム登録", rooms_new_path %></li>
+                <li><%= link_to "予約済みルーム一覧", reservations_path %></li>
+                <li><%= link_to "登録済みルーム一覧", index_path %></li>
+                <li><%= link_to "設定", @current_user %></li>
+                <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
+              </ul>
+            </li>
+          </ul>
+        <% else %>
+          <li class="btn1"><%= link_to "ログイン", login_path %></li>
+          <li class="btn2"><%= link_to "登録する", signup_path %></li>
+        <% end %>
       </ul>
     </nav>
   </div>

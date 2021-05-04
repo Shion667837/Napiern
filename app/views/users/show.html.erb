@@ -1,0 +1,47 @@
+<%= provide(:title, @user.name) %>
+<div class="user-nav">
+  <ul>
+    <li>アカウント</li>
+    <li><%= link_to "プロフィール編集", edit_user_path(@user) %></li>
+  </ul>
+</div>
+<div class="user">
+  <div class="user-items">
+    <div class="user-view-box">
+      <div class="user-view-box-icon">
+        <% if current_user.image_name? %>
+          <%= image_tag current_user.image_name.url %>
+        <% else %>
+          <img src="<%= "/user_images/#{@user.image_name}" %>">
+        <% end %>
+      </div>
+      <div class="update-contents">
+        <div class="row">
+          <h3>ユーザー名</h3>
+          <h3><%= @user.name %></h3>
+        </div>
+      </div>
+      <div class="update-contents">
+        <div class="row">
+          <h3>メールアドレス</h3>
+          <h3><%= @user.email %></h3>
+        </div>
+      </div>
+      <div class="update-contents">
+        <div class="row">
+          <h3>パスワード</h3>
+          <h3>*********</h3>
+        </div>
+      </div>
+      <div class="update-contents">
+        <div class="row">
+          <h3>自己紹介</h3>
+          <h3><%= @user.body %></h3>
+        </div>
+      </div>
+      <div class="edit-link-btn">
+        <%= link_to "編集", edit_user_path(@user), class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>

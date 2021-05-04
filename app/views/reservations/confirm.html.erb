@@ -1,0 +1,34 @@
+<div class="container reservation-confirm">
+  <div class="row">
+    <div class="col-6 offset-3">
+      <div class="reservation-nav">
+        <h3>予約内容確認</h3>
+        <%= form_for @reservation do |f| %>
+          <h2>¥<%= @price %>/ 日</h2>
+          <div class="confirm">
+            <%= f.text_field :room_id, class: "form-control", readonly: true %>
+            <%= f.text_field :room_img, class: "form-control", readonly: true %>
+            <%= f.text_field :room_name, class: "form-control", readonly: true %>
+            <%= f.text_field :room_body, class: "form-control", readonly: true %>
+          </div>
+
+          <h2>開始日</h2>
+          <%= f.text_field :start_date, readonly: true, class: 'form-control' %>
+
+          <h2>終了日</h2>
+          <%= f.text_field :end_date, readonly: true, class: 'form-control' %>
+
+          <h2>人数</h2>
+          <%= f.number_field :people, readonly: true, class: 'form-control' %>
+
+          <h2>合計金額</h2>
+          <%= f.number_field :total_price, readonly: true, class: 'form-control' %>
+
+          <p>上記の内容でよろしければ「予約を確定」を押してください。</p>
+
+          <%= f.submit "予約を確定", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

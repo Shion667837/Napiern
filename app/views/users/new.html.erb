@@ -1,7 +1,22 @@
 <%= provide(:title, 'Sign up') %>
+<h1>新しいアカウントを作成</h1>
 
-<div class="center">
-  <h3>TravelAppでまだ体験したことのない旅をしよう</h3>
-  <h3>TravelAppでまだ体験したことのない旅をしよう</h3>
-  
+<div class="signup-form">
+  <%= form_with(model: @user, local: true) do |f| %>
+    <%= render 'shared/error_messages' %>
+
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+
+    <%= f.label :email %>
+    <%= f.email_field :email, class: "form-control" %>
+
+    <%= f.label :password %>
+    <%= f.password_field :password, class: "form-control" %>
+
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, class: "form-control" %>
+
+    <%= f.submit "新しいアカウントを作成", class: "btn btn-primary" %>
+  <% end %>
 </div>

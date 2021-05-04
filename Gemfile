@@ -10,6 +10,18 @@ gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 
+gem 'bcrypt', '3.1.13'
+
+gem 'bootstrap-sass', '3.4.1'
+
+gem 'carrierwave'
+
+gem 'ransack'
+
+gem 'bootstrap3-datetimepicker-rails'
+
+gem 'momentjs-rails'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
