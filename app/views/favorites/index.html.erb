@@ -1,0 +1,12 @@
+<div class="container-fiuld post-posts">
+  <h3 class="ppp">お気に入り企業一覧</h3>
+  <div class="favorite-coop-items">
+    <div class="container">
+      <% @favorite_companies.each do |company| %>
+        <div class="favo-item">
+          <%= link_to company.coop_name, "/posts/34" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

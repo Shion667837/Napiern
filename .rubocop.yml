@@ -18,3 +18,19 @@ Style/HashTransformKeys:
 # For rubocop < 1.0.0
 Style/HashTransformValues:
   Enabled: true
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/AbcSize:
+  # The ABC size is a calculated magnitude, so this number can be a Fixnum or
+  # a Float.
+  Max: 30
+
+MethodLength:
+  CountComments: true  # count full line comments?
+  Max: 11
+
+# Use only ascii symbols in comments.
+AsciiComments:
+  Enabled: false

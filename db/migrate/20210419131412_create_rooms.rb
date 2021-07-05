@@ -8,7 +8,7 @@ class CreateRooms < ActiveRecord::Migration[6.1]
       t.references :user, foreign_key: true
 
       t.timestamps
-      add_index :rooms, [:user_id, :created_at]
+      add_index :rooms, %i[user_id created_at]
     end
   end
 end

@@ -1,0 +1,152 @@
+<div class="wrapper">
+  <nav id="sidebar">
+    <% if logged_in? %>
+      <div class="sideber-main-host">
+        <div class="sidebar-header">
+          <% if @current_user.image_name? %>
+            <%= image_tag @current_user.image_name.url %>
+          <% else %>
+            <%= image_tag "/user_images/default.png" %>
+          <% end %>
+        </div>
+        <div class="sidebar-host">
+          <%= @current_user.name %>
+        </div>
+        <div class="sidebar-body">
+          <%= @current_user.body %>
+        </div>
+        <div class="sidebar-btn">
+          <div class="btn btn-primary">
+            <%= link_to "プロフィール編集", @current_user %>
+          </div>
+        </div>
+        <div class="sidebar-btn">
+          <div class="post-btn">
+            <%= link_to posts_new_path do %>
+              <i class="fas fa-plus"></i>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <ul class="list-unstyled components">
+        <%= link_to index_path do %>
+          <li class="post-list">
+            <i class="far fa-clipboard"></i><br>
+            投稿一覧
+          </li>
+        <% end %>
+        <%= link_to favorites_index_path do %>
+          <li class="favorite-coop">
+            <i class="far fa-star"></i><br>
+            お気に入り企業
+          </li>
+        <% end %>
+        <li class="popular-post">
+          <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="fas fa-crown"></i><br>
+            人気投稿ランキング
+          </a>
+          <ul class="collapse list-unstyled" id="pageSubmenu">
+            <li>
+              <%= link_to '全体', posts_post_ranking_path %>
+            </li>
+            <li>
+              <%= link_to '週間', posts_week_ranking_path %>
+            </li>
+            <li>
+              <%= link_to '月間', posts_month_ranking_path %>
+            </li>
+          </ul>
+        </li>
+        <li class="active coop-list">
+          <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="far fa-building"></i><br>
+            企業一覧
+          </a>
+          <ul class="collapse list-unstyled" id="homeSubmenu">
+            <div class="search-area">
+              <form>
+                <input type="text" id="search-text" placeholder="検索ワードを入力">
+              </form>
+              <div class="search-result">
+                <div class="search-result__hit-num"></div>
+                <div id="search-result__list"></div>
+              </div>
+            </div>
+            <ul class="target-area">
+              <li>
+                <a class="tesla" href="companies/1">TESLA</a>
+              </li>
+              <li>
+                <a class="tesla" href="companies/2">Apple</a>
+              </li>
+              <li>
+                <a class="tesla" href="companies/3">Google</a>
+              </li>
+              <li>
+                <a class="tesla" href="companies/4">Amazon</a>
+              </li>
+              <li>
+                <a class="tesla" href="companies/5">NETFLIX</a>
+              </li>
+            </ul>
+          </ul>
+        </li>
+      </ul>
+    <% else %>
+      <ul class="list-unstyled components">
+        <li class="popular-post">
+          <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="fas fa-crown"></i><br>
+            人気投稿ランキング
+          </a>
+          <ul class="collapse list-unstyled" id="pageSubmenu">
+            <li>
+              <%= link_to '全体', posts_post_ranking_path %>
+            </li>
+            <li>
+              <%= link_to '週間', posts_week_ranking_path %>
+            </li>
+            <li>
+              <%= link_to '月間', posts_month_ranking_path %>
+            </li>
+          </ul>
+        </li>
+        <li class="active coop-list">
+          <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="far fa-building"></i><br>
+            企業一覧
+          </a>
+          <ul class="collapse list-unstyled" id="homeSubmenu">
+            <div class="search-area">
+              <form>
+                <input type="text" id="search-text" placeholder="検索ワードを入力">
+              </form>
+              <div class="search-result">
+                <div class="search-result__hit-num"></div>
+                <div id="search-result__list"></div>
+              </div>
+            </div>
+            <ul class="target-area">
+              <li>
+                <a class="tesla" href="companies/1">TESLA</a>
+              </li>
+              <li>
+                <a href="#">Apple</a>
+              </li>
+              <li>
+                <a href="#">Amazon</a>
+              </li>
+              <li>
+                <a href="#">Google</a>
+              </li>
+              <li>
+                <a href="#">NETFLIX</a>
+              </li>
+            </ul>
+          </ul>
+        </li>
+      </ul>
+    <% end %>
+  </nav>
+</div>

@@ -1,0 +1,114 @@
+<div class="container post-show">
+  <div class="row">
+    <div class="col-md-8">
+      <img src="<%= @post.stockprice %>" class="stockprice-image" alt="株価">
+      <div class="slider">
+        <% if @post.images.attached? %>
+          <% @post.images.each do |image| %>
+              <%= image_tag image %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="post-show-detail">
+        <div class="post-show-icon">
+          <% if @post.user.image_name? %>
+            <%= image_tag @post.user.image_name.url, class: "host-icon" %>
+          <% else %>
+            <%= image_tag "/user_images/default.png", class: "host-icon" %>
+          <% end %>
+        </div>
+        <div class="post-show-prof">
+          <p class="show-name"><%= @post.name %></p>
+          <p class="show-place"><%= @post.place %></p>
+        </div>
+      </div>
+      <p class="show-body"><%= @post.body %></p>
+      <div class="likes-icon">
+        <p id="post_<%= @post.id %>">
+        <% if logged_in? %>
+          <% if @current_user.liked_by?(@post.id) %>
+            <%= render 'unlike', post: @post %>
+          <% else %>
+            <%= render 'likes', post: @post %>
+          <% end %>
+        <% else %>
+          <%= render 'likes', post: @post %>
+        <% end %>
+      </p>
+      </div>
+      <div class="trash-icon">
+        <p>
+          <% if logged_in? %>
+            <% if @post.user_id == @current_user.id %>
+              <%= link_to @post, method: :delete, data: { confirm: "#{@post.name}を削除して大丈夫ですか？" } do %>
+                <i class="fas fa-trash-alt"></i>
+              <% end %>
+            <% end %>
+          <% end%>
+        </p>
+      </div>
+      <div class="show-body">
+        <% if logged_in? %>
+          <div id="comments_create %>">
+            <h3 class="text-left">コメントを投稿する</h3>
+            <%= render partial: 'comments/form', locals: { comment: @comment, post: @post } %>
+          </div>
+        <% end %>
+        <ul>
+          <div class="comment-create">
+            <h3 class="text-left title">コメント</h3>
+          </div>
+          <div id="comments_area">
+            <%= render partial: 'comments/index', locals: { comments: @comments } %>
+          </div>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="post-show-form">
+        <div class="post-show-detail">
+          <%= image_tag "tesla1.png", class: "tesla1-post-image" %>
+        </div>
+        <div class="post-show-detail">
+          <%= image_tag "tesla2.png", class: "tesla2-post-image" %>
+        </div>
+        <div class="post-show-detail">
+          <%= image_tag "tesla3.png", class: "tesla3-post-image" %>
+        </div>
+        <div class="post-show-detail">
+          <%= image_tag "tesla4.png", class: "tesla4-post-image" %>
+        </div>
+        <div class="post-show-detail">
+          <%= image_tag "tesla5.png", class: "tesla5-post-image" %>
+        </div>
+        <div class="post-show-detail">
+          <%= image_tag "tesla6.png", class: "tesla6-post-image" %>
+        </div>
+        <div class="post-show-detail">
+          <%= image_tag "tesla7.png", class: "tesla7-post-image" %>
+        </div>
+        <div class="post-show-detail">
+          <%= image_tag "tesla8.png", class: "tesla8-post-image" %>
+        </div>
+        <div class="post-show-detail">
+          <%= image_tag "tesla9.png", class: "tesla9-post-image" %>
+        </div>
+        <div class="post-show-detail">
+          <%= image_tag "tesla10.png", class: "tesla10-post-image" %>
+        </div>
+        <div class="post-show-detail">
+          <%= image_tag "tesla11.png", class: "tesla11-post-image" %>
+        </div>
+        <div class="post-show-detail">
+          <%= image_tag "tesla12.png", class: "tesla12-post-image" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  $(function() {
+    $('.slider').slick(
+    );
+  });
+</script>

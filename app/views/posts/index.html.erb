@@ -1,0 +1,25 @@
+<%=  provide(:title, 'Index') %>
+<div class="container-fiuld post-posts">
+  <h3 class="ppp">投稿一覧</h3>
+  <div class="user-items">
+    <table>
+      <tr>
+        <th>写真</th>
+        <th>タイトル</th>
+        <th>概要</th>
+        <th>エリア</th>
+        <th>作成日</th>
+        <th colspan="3"></th>
+      </tr>
+      <% current_user.posts.each do |post| %>
+        <tr>
+          <td><img src="<%= post.stockprice %>" class="post-post-image" alt="画像"></td>
+          <td><%= link_to(post.name, "/posts/#{post.id}") %></td>
+          <td><%= post.body %></td>
+          <td><%= post.place %></td>
+          <td><%= post.created_at %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

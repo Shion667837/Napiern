@@ -1,19 +1,13 @@
-<header class="navbar-inverse">
+<header class="navbarInverse">
   <div class="container">
-    <%= link_to "TravelApp", root_path, id: "logo" %>
+    <%= link_to "Napier", root_path, id: "logo" %>
+    <%= image_tag "IMG_9442.PNG", class: "napier-image" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li class="search-form">
-          <%= search_form_for @search, url: rooms_search_path do |f| %>
-            <% f.label :place, "エリア" %>
-            <%= f.search_field :place_cont, placeholder: "エリア" %>
-            <% f.submit "検索" %>
-          <% end %>
-        </li>
-        <li class="search-form">
-          <%= search_form_for @search, url: rooms_search_path do |f| %>
+          <%= search_form_for @search, url: posts_search_path do |f| %>
             <% f.label :name %>
-            <%= f.search_field :name_or_body_cont, placeholder: "キーワード" %>
+            <%= f.search_field :name_or_body_or_place_cont, placeholder: "キーワード" %>
             <% f.submit %>
           <% end %>
         </li>
@@ -21,20 +15,24 @@
           <ul id="navigation">
             <li><%= @current_user.name %></li>
             <li>
-              <a href="#">
-                <% if @current_user.image_name? %>
-                  <%= image_tag @current_user.image_name.url %>
-                <% else %>
-                  <%= image_tag "/user_images/default.png" %>
-                <% end %>
-              </a>
-              <ul>
-                <li><%= link_to "ルーム登録", rooms_new_path %></li>
-                <li><%= link_to "予約済みルーム一覧", reservations_path %></li>
-                <li><%= link_to "登録済みルーム一覧", index_path %></li>
-                <li><%= link_to "設定", @current_user %></li>
-                <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
-              </ul>
+              <% if @current_user.image_name? %>
+                <%= image_tag @current_user.image_name.url %>
+              <% else %>
+                <%= image_tag "/user_images/default.png" %>
+              <% end %>
+              <li>
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <p>三</p>
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuBotton">
+                    <a class="dropdown-item"><%= link_to "投稿する", posts_new_path %></a><br>
+                    <a class="dropdown-item"><%= link_to "投稿一覧", index_path %></a><br>
+                    <a class="dropdown-item"><%= link_to "設定", @current_user %></a><br>
+                    <a class="dropdown-item"><%= link_to "ログアウト", logout_path, method: :delete %></a>
+                  </div>
+                </div>
+              </li>
             </li>
           </ul>
         <% else %>

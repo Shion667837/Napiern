@@ -1,0 +1,14 @@
+<div class="container company-show">
+  <div class="company-show-prof">
+    <p class="company-show-name"><%= @company.coop_name %></p>
+    <p class="company-show-place"><%= @company.coop_place %></p>
+  </div>
+  <div class='star-btn' id="favorite_<%= @company.id %>">
+    <%= render "favorites/favorite", company: @company %>
+  </div>
+  <div class="company-show-form">
+    <div class="company-show-detail">
+      <%= image_tag "tesla.jpg", class: "tesla-image" %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="user">
+  <div class="user-view-box">
+    <h3>投稿を作成</h3>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <%= form_with(model: @post, local: true) do |f| %>
+
+          <%= f.label "タイトル" %>
+          <%= f.text_field :name, class: "form-control" %>
+
+          <%= f.label "概要" %>
+          <%= f.text_area :body, class: "form-control" %>
+
+          <%= f.label "エリア" %>
+          <%= f.text_field :place, class: "form-control" %>
+
+          <%= f.label "株価画像" %>
+          <%= f.file_field :stockprice, class: "form-control" %>
+
+          <%= f.label "ビジネスモデル" %>
+          <%= f.file_field :images, multiple: true, class: "form-control" %>
+
+          <%= f.submit "投稿", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

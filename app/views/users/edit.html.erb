@@ -7,32 +7,47 @@
 </div>
 
 <div class="user">
-  <h3>プロフィール編集</h3>
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <%= form_with(model: @user, local: true, multipart: true) do |f| %>
-        <%= render 'shared/error_messages' %>
+  <div class="user-view-box">
+    <h3>プロフィール編集</h3>
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <%= form_with(model: @user, local: true, multipart: true) do |f| %>
+          <%= render 'shared/error_messages' %>
 
-        <%= f.label "アイコン画像" %>
-        <%= f.file_field :image_name, class: 'form-control' %>
+          <h2> ユーザー </h2>
+          <%= f.label "アイコン画像", class: 'form-control' %>
+          <%= f.file_field :image_name, class: 'form-control' %>
 
-        <%= f.label "名前" %>
-        <%= f.text_field :name, class: 'form-control' %>
+          <%= f.label "名前", class: 'form-control' %>
+          <%= f.text_field :name, class: 'form-control' %>
 
-        <%= f.label "自己紹介" %>
-        <%= f.text_area :body, class: 'form-control' %>
+          <%= f.label "メールアドレス", class: 'form-control' %>
+          <%= f.email_field :email, class: 'form-control' %>
 
-        <%= f.label "メールアドレス" %>
-        <%= f.email_field :email, class: 'form-control' %>
+          <%= f.label "自己紹介", class: 'form-control' %>
+          <%= f.text_area :body, class: 'form-control' %>
 
-        <%= f.label "パスワード" %>
-        <%= f.password_field :password, class: 'form-control' %>
+          <h2> SNS URL </h2>
+          <h4>(任意)</h4>
+          <%= f.label :twitter, 'Twitter URL', class: 'form-control' %>
+          <%= f.text_field :twitter, placeholder: "任意", class: "form-control" %>
 
-        <%= f.label "パスワード確認" %>
-        <%= f.password_field :password_confirmation, class: 'form-control' %>
+          <%= f.label :facebook, 'Facebook URL', class: 'form-control' %>
+          <%= f.text_field :facebook, placeholder: "任意", class: "form-control" %>
 
-        <%= f.submit "更新", class: "btn btn-primary" %>
-      <% end %>
+          <%= f.label :instagram, 'Instagram URL', class: 'form-control' %>
+          <%= f.text_field :instagram, placeholder: "任意", class: "form-control" %>
+
+          <h2> パスワード変更 </h2>
+          <%= f.label "パスワード", class: 'form-control' %>
+          <%= f.password_field :password, class: 'form-control' %>
+
+          <%= f.label "パスワード確認", class: 'form-control' %>
+          <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+          <%= f.submit "更新", class: "btn btn-primary" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
