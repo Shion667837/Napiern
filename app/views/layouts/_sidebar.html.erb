@@ -1,6 +1,7 @@
-<div class="wrapper">
+<%= render 'layouts/header' %>
+<div class="wrapper" id="nav-bar">
   <nav id="sidebar">
-    <% if logged_in? %>
+    <div class="sidebar-item-fixed">
       <div class="sideber-main-host">
         <div class="sidebar-header">
           <% if @current_user.image_name? %>
@@ -12,8 +13,34 @@
         <div class="sidebar-host">
           <%= @current_user.name %>
         </div>
+        <div class="side-stats">
+          <%= render 'shared/side_stats' %>
+        </div>
         <div class="sidebar-body">
           <%= @current_user.body %>
+        </div>
+        <div class="sidebar-sns">
+          <% if @current_user.twitter.present? %>
+            <div class="profile-link">
+              <%= link_to @current_user.twitter, target: :_blank do %>
+                <i class="fab fa-twitter-square"></i>
+              <% end %>
+            </div>
+          <% end %>
+          <% if @current_user.facebook.present? %>
+            <div class="profile-link">
+              <%= link_to @current_user.facebook, target: :_blank do %>
+                <i class="fab fa-facebook-square"></i>
+              <% end %>
+            </div>
+          <% end %>
+          <% if @current_user.instagram.present? %>
+            <div class="profile-link">
+              <%= link_to @current_user.instagram, target: :_blank do %>
+                <i class="fab fa-instagram"></i>
+              <% end %>
+            </div>
+          <% end %>
         </div>
         <div class="sidebar-btn">
           <div class="btn btn-primary">
@@ -23,28 +50,26 @@
         <div class="sidebar-btn">
           <div class="post-btn">
             <%= link_to posts_new_path do %>
-              <i class="fas fa-plus"></i>
+              <i class="fas fa-share-square"></i>
             <% end %>
           </div>
         </div>
       </div>
-      <ul class="list-unstyled components">
-        <%= link_to index_path do %>
-          <li class="post-list">
-            <i class="far fa-clipboard"></i><br>
-            投稿一覧
-          </li>
-        <% end %>
-        <%= link_to favorites_index_path do %>
-          <li class="favorite-coop">
-            <i class="far fa-star"></i><br>
-            お気に入り企業
-          </li>
-        <% end %>
-        <li class="popular-post">
-          <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-            <i class="fas fa-crown"></i><br>
-            人気投稿ランキング
+      <div class="nav_list">
+        <div class="sidebar-list">
+          <%= link_to @user, class: "nav_link active border" do %>
+            <i class="far fa-clipboard nav_icon"></i>
+            <span class="nav_name">投稿一覧</span>
+          <% end %>
+          <%= link_to favorites_index_path, class: "nav_link" do %>
+            <i class="far fa-star nav_icon"></i>
+            <span class="nav_name">お気に入り企業</span>
+          <% end %>
+        </div>
+        <div class="sidebar-list">
+          <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="nav_link">
+            <i class="fas fa-crown nav_icon"></i>
+            <span class="nav_name">人気投稿ランキング</span>
           </a>
           <ul class="collapse list-unstyled" id="pageSubmenu">
             <li>
@@ -57,11 +82,9 @@
               <%= link_to '月間', posts_month_ranking_path %>
             </li>
           </ul>
-        </li>
-        <li class="active coop-list">
-          <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-            <i class="far fa-building"></i><br>
-            企業一覧
+          <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="nav_link">
+            <i class='far fa-building nav_icon'></i>
+            <span class="nav_name">企業一覧</span>
           </a>
           <ul class="collapse list-unstyled" id="homeSubmenu">
             <div class="search-area">
@@ -91,62 +114,22 @@
               </li>
             </ul>
           </ul>
-        </li>
-      </ul>
-    <% else %>
-      <ul class="list-unstyled components">
-        <li class="popular-post">
-          <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-            <i class="fas fa-crown"></i><br>
-            人気投稿ランキング
+        </div>
+        <div class="sidebar-list">
+          <%= link_to about_path, class: "nav_link" do %>
+            <i class="fab fa-adn nav_icon"></i>
+            <span class="nav_name">ネイピアとは</span>
+          <% end %>
+          <a href="#" class="nav_link">
+            <i class='fas fa-users-cog nav_icon'></i>
+            <span class="nav_name">利用規約</span>
           </a>
-          <ul class="collapse list-unstyled" id="pageSubmenu">
-            <li>
-              <%= link_to '全体', posts_post_ranking_path %>
-            </li>
-            <li>
-              <%= link_to '週間', posts_week_ranking_path %>
-            </li>
-            <li>
-              <%= link_to '月間', posts_month_ranking_path %>
-            </li>
-          </ul>
-        </li>
-        <li class="active coop-list">
-          <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-            <i class="far fa-building"></i><br>
-            企業一覧
+          <a href="#" class="nav_link">
+            <i class='fas fa-question nav_icon'></i>
+            <span class="nav_name">ヘルプ</span>
           </a>
-          <ul class="collapse list-unstyled" id="homeSubmenu">
-            <div class="search-area">
-              <form>
-                <input type="text" id="search-text" placeholder="検索ワードを入力">
-              </form>
-              <div class="search-result">
-                <div class="search-result__hit-num"></div>
-                <div id="search-result__list"></div>
-              </div>
-            </div>
-            <ul class="target-area">
-              <li>
-                <a class="tesla" href="companies/1">TESLA</a>
-              </li>
-              <li>
-                <a href="#">Apple</a>
-              </li>
-              <li>
-                <a href="#">Amazon</a>
-              </li>
-              <li>
-                <a href="#">Google</a>
-              </li>
-              <li>
-                <a href="#">NETFLIX</a>
-              </li>
-            </ul>
-          </ul>
-        </li>
-      </ul>
-    <% end %>
+        </div>
+      </div>
+    </div>
   </nav>
 </div>

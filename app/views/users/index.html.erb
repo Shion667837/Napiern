@@ -1,0 +1,24 @@
+<% provide(:title, 'ユーザー一覧') %>
+
+<%= will_paginate %>
+
+<ul class="users">
+  <h1>ユーザー一覧</h1>
+  <div class="users-index">
+    <% @users.each do |user| %>
+      <li>
+        <div class="post-show-icon">
+          <% if user.image_name? %>
+            <%= image_tag user.image_name.url, class: "host-icon" %>
+            <span class="host-name"><%= link_to user.name, user %></span>
+          <% else %>
+            <%= image_tag "/user_images/default.png", class: "host-icon" %>
+            <span class="host-name"><%= link_to user.name, user %></span>
+          <% end %>
+        </div>
+      </li>
+    <% end %>
+  </div>
+</ul>
+
+<%= will_paginate %>

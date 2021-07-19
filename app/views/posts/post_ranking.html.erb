@@ -38,7 +38,7 @@
             </div>
             <div class="post-text-box">
               <p class="post-name"><%= post.name %></p>
-              <p class="post-place"><%= post.place %></p>
+              <p class="post-place"><%= post.body.truncate(100) %></p>
               <p class="post-price" id="post_<%= post.id %>">
                 <% if logged_in? %>
                   <% if current_user.liked_by?(post.id) %>

@@ -12,6 +12,10 @@ gem 'puma', '~> 5.0'
 
 gem 'bcrypt', '3.1.13'
 
+gem 'will_paginate', '3.1.8'
+
+gem 'bootstrap-will_paginate', '1.0.0'
+
 gem 'bootstrap-sass', '3.4.1'
 
 gem 'carrierwave'
@@ -23,6 +27,10 @@ gem 'bootstrap3-datetimepicker-rails'
 gem 'momentjs-rails'
 
 gem 'font-awesome-sass'
+
+gem 'toastr-rails'
+
+gem 'rails-i18n'
 
 gem 'redis'
 # Use SCSS for stylesheets

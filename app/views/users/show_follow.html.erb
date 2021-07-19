@@ -1,0 +1,28 @@
+<%= provide(:title, @title) %>
+<div class="user">
+  <div class="container">
+    <div class="user-main-contents">
+      <%= render 'sidebar_show' %>
+      <div class="user-index-post">
+        <h3><%= @title %></h3>
+        <% if @users.any? %>
+          <div class="users-index">
+            <% @users.each do |user| %>
+              <div class="post-show-icon">
+                <% if user.image_name? %>
+                  <%= image_tag user.image_name.url, class: "host-icon" %>
+                  <span class="host-name"><%= link_to user.name, user %></span>
+                <% else %>
+                  <%= image_tag "/user_images/default.png", class: "host-icon" %>
+                  <span class="host-name"><%= link_to user.name, user %></span>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+          <%= will_paginate %>
+        <% end %>
+        <%= link_to "詳細ページに戻る", @user %>
+      </div>
+    </div>
+  </div>
+</div>

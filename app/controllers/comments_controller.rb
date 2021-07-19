@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
     @comment = @post.comments.build(comment_params)
     @comment.user_id = current_user.id
     @comment.save
+    flash[:success] = 'コメントを投稿しました'
     redirect_to("/posts/#{@post.id}")
   end
 

@@ -1,0 +1,41 @@
+<%= provide(:title, 'いいねした投稿') %>
+<div class="user">
+  <div class="container">
+    <div class="user-main-contents">
+      <%= render 'sidebar_show' %>
+      <div class="user-index-post">
+        <%= @likes.each do |like| %>
+          <div class="user-feed">
+              <%= link_to "/posts/#{like.post.id}" do %>
+                <div class="user-post-flame">
+                  <div class="post-show-icon">
+                    <% if like.post.user.image_name? %>
+                      <%= image_tag like.post.user.image_name.url, class: "host-icon" %>
+                      <span class="host-name"><%= like.post.user.name %></span>
+                    <% else %>
+                      <%= image_tag "/user_images/default.png", class: "host-icon" %>
+                      <span class="host-name"><%= like.post.user.name %></span>
+                    <% end %>
+                    <% if logged_in? %>
+                      <% if like.post.user_id == current_user.id %>
+                        <%= link_to  like.post, method: :delete, data: { confirm: "#{like.post.name}を削除して大丈夫ですか？" } do %>
+                          <i class="fas fa-trash-alt trash"></i>
+                        <% end %>
+                      <% end %>
+                    <% end%>
+                  </div>
+                  <div class="post-img">
+                    <img src="<%= like.post.stockprice %>" class="post-image" alt="画像">
+                  </div>
+                  <div class="post-text-box">
+                    <p class="post-name"><%= like.post.name %></p>
+                    <p class="post-place"><%= like.post.body.truncate(100) %></p>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,54 +1,86 @@
-<%= render 'layouts/sidebar' %>
-<div class="top">
-  <div class="top-main">
-    <div class="container">
-      <div class="top-form">
-        <h3><span>Napier</span>へようこそ！</h3>
-        <h2>Napier（ネイピア）は自分の企業分析を簡単にシェアできるSNSです。</h2>
-        <div class="top-box">
-          <div class="top-wrapper">
-            <div class="top-about">
-              <div class="top-about-heading">
-                <h3 class="head-h3"><span>Napier</span>を利用することで何を得れるか</h3>
+<% if logged_in? %>
+  <%= render 'layouts/sidebar' %>
+  <div class="container-fiuld post">
+    <ul class="all-post">
+      <% @posts.each do |post| %>
+        <div class="user-feed">
+          <%= link_to "/posts/#{post.id}" do %>
+            <div class="rank-post-flame">
+              <div class="post-show-icon">
+                <% if post.user.image_name? %>
+                  <%= image_tag post.user.image_name.url, class: "host-icon" %>
+                  <span class="host-name"><%= post.user.name %></span>
+                <% else %>
+                  <%= image_tag "/user_images/default.png", class: "host-icon" %>
+                  <span class="host-name"><%= post.user.name %></span>
+                <% end %>
+                <% if logged_in? %>
+                  <% if post.user_id == current_user.id %>
+                    <%= link_to  post, method: :delete, data: { confirm: "#{post.name}を削除して大丈夫ですか？" } do %>
+                      <i class="fas fa-trash-alt trash"></i>
+                    <% end %>
+                  <% end %>
+                <% end%>
               </div>
-              <div class="top-about-items">
-                <ol>
-                  <li>企業の分析を通してビジネスモデルや株式の知識を得れる</li>
-                  <li>株式投資やビジネスモデル構築に興味をもち投資や経営を始める</li>
-                  <li>自分の力で自己資産を築くことができる</li>
-                  <li>知識・資産が増えれば人生の選択肢が増える</li>
-                </ol>
+              <div class="post-img">
+                <img src="<%= post.stockprice %>" class="post-image" alt="画像">
               </div>
-              <p>私たちのSNS サービスにより「人生の選択肢となる土台」を提供します！</p>
+              <div class="post-text-box">
+                <p class="post-name"><%= post.name %></p>
+                <p class="post-place"><%= post.body.truncate(100) %></p>
+                <p class="post-price" id="post_<%= post.id %>">
+                  <% if logged_in? %>
+                    <% if current_user.liked_by?(post.id) %>
+                      <%= render 'unlike', post: post %>
+                    <% else %>
+                      <%= render 'likes', post: post %>
+                    <% end %>
+                  <% else %>
+                    <%= render 'likes', post: post %>
+                  <% end %>
+                </p>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </ul>
+  </div>
+<% else %>
+  <div class="top">
+    <div class="top-main">
+      <div class="container">
+        <div class="row">
+          <div class="top-contents">
+            <div class="col-md-8">
+              <div class="home-title">
+                <h4 class="home-napier">Napier</h4>
+                <%= image_tag "IMG_9446.PNG", class: "napier-home-image" %>
+                <div class="home-about">
+                  <h2>Napier（ネイピア）は自分の企業分析を簡単にシェアできるSNSです。</h2>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="home-form">
+                <%= form_with(url: login_path, scope: :session, local: true) do |f| %>
+                  <%= f.email_field :email, class: 'form-control', placeholder: "メールアドレス" %>
+                  <%= f.password_field :password, class: 'form-control', placeholder: "パスワード" %>
+                  <%= f.label :remember_me, class: "checkbox inline" do %>
+                    <%= f.check_box :remember_me %>
+                    <span>パスワードを記憶する</span>
+                  <% end %>
+                  <%= f.submit "ログイン", class: "btn btn-primary" %>
+                <% end %>
+                <div class="home-signup">
+                  <%= link_to "登録する", signup_path, class: "btn" %>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="top-box">
-          <div class="top-wrapper">
-            <div class="top-about">
-              <div class="top-about-heading">
-                <h3 class="head-h3">ログイン / 新規登録</h3>
-              </div>
-              <p>ログイン/新規登録すると、このSNSが提供する各種サービスが利用可能になります！</p>
-              <div class="top-about-items">
-                <ol>
-                  <li>企業をお気に入り登録できる</li>
-                  <li>自分の分析結果を自由に投稿できる</li>
-                  <li>ユーザー投稿記録が残る</li>
-                </ol>
-              </div>
-              <p>今後さまざまな機能を実装していく予定です。Comming Soon !!!</p>
-            </div>
-          </div>
-        </div>
-        <div class="top-footer-btn">
-          <%= link_to "ログイン", login_path %>
-        </div>
-        <div class="top-footer-btn">
-          <%= link_to "登録する", signup_path %>
-        </div>
-      </div>
       </div>
     </div>
   </div>
-</div>
+  <%= render "layouts/footer" %>
+<% end %>

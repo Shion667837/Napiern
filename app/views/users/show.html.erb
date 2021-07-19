@@ -1,81 +1,45 @@
 <%= provide(:title, @user.name) %>
-<div class="user-nav">
-  <ul>
-    <li>アカウント</li>
-    <li><%= link_to "プロフィール編集", edit_user_path(@user) %></li>
-  </ul>
-</div>
 <div class="user">
-  <div class="user-items">
-    <div class="user-view-box">
-      <div class="user-view-box-icon">
-        <% if current_user.image_name? %>
-          <%= image_tag current_user.image_name.url %>
-        <% else %>
-          <img src="<%= "/user_images/#{@user.image_name}" %>">
-        <% end %>
-      </div>
-      <div class="update-contents">
-        <h3>ユーザー名</h3>
-        <h3><%= @user.name %></h3>
-      </div>
-      <div class="update-contents">
-        <h3>メールアドレス</h3>
-        <h3><%= @user.email %></h3>
-      </div>
-      <div class="update-contents">
-        <h3>自己紹介</h3>
-        <h3><%= @user.body %></h3>
-      </div>
-      <div class="update-contents">
-        <h3>My SNS</h3>
-        <ul class="profile-links">
-          <% if @user.twitter.present? %>
-            <li class="profile-link">
-              <%= link_to @user.twitter, target: :_blank do %>
-                <i class="fab fa-twitter-square"></i>
-              <% end %>
-            </li>
-          <% end %>
-          <% if @user.facebook.present? %>
-            <li class="profile-link">
-              <%= link_to @user.facebook, target: :_blank do %>
-                <i class="fab fa-facebook-square"></i>
-              <% end %>
-            </li>
-          <% end %>
-          <% if @user.instagram.present? %>
-            <li class="profile-link">
-              <%= link_to @user.instagram, target: :_blank do %>
-                <i class="fab fa-instagram"></i>
-              <% end %>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-      <div class="update-contents">
-        <h3>My Favorite</h3>
-        <% if @favorites.present? %>
-          <ul class="relative-company-lists">
-            <% @favorites.each do |favorite| %>
-              <li class='company-list'>
-                <%= link_to company_path(favorite.id) do %>
-                  <div class='relative-company-name'>
-                    企業名：<%= favorite.coop_name %>
+  <div class="container">
+    <div class="user-main-contents">
+      <%= render 'sidebar_show', user: @user %>
+      <div class="user-index-post">
+        <% if @user.posts.present? %>
+          <h2>投稿数： <%= @user.posts.count %></h2>
+          <% @user.posts.each do |post| %>
+            <div class="user-feed">
+              <%= link_to "/posts/#{post.id}" do %>
+                <div class="user-post-flame">
+                  <div class="post-show-icon">
+                    <% if post.user.image_name? %>
+                      <%= image_tag post.user.image_name.url, class: "host-icon" %>
+                      <span class="host-name"><%= post.user.name %></span>
+                    <% else %>
+                      <%= image_tag "/user_images/default.png", class: "host-icon" %>
+                      <span class="host-name"><%= post.user.name %></span>
+                    <% end %>
+                    <% if logged_in? %>
+                      <% if post.user_id == current_user.id %>
+                        <%= link_to  post, method: :delete, data: { confirm: "#{post.name}を削除して大丈夫ですか？" } do %>
+                          <i class="fas fa-trash-alt trash"></i>
+                        <% end %>
+                      <% end %>
+                    <% end%>
                   </div>
-                  <div class="relative-company-date">
-                    更新日時：<%= favorite.created_at.strftime("%Y.%m.%d") %>
+                  <div class="post-img">
+                    <img src="<%= post.stockprice %>" class="post-image" alt="画像">
                   </div>
-                <% end %>
-              </li>
-            <% end %>
-          </ul>
+                  <div class="post-text-box">
+                    <p class="post-name"><%= post.name %></p>
+                    <p class="post-place"><%= post.body.truncate(100) %></p>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
         <% else %>
-          ppp
+          <h1>未投稿</h1>
         <% end %>
-      </div>
-      <div class="edit-link-btn">
-        <%= link_to "編集", edit_user_path(@user), class: "btn btn-primary" %>
       </div>
     </div>
   </div>

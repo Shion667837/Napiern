@@ -5,16 +5,17 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email].downcase)
     if user&.authenticate(params[:session][:password])
       log_in user
-      flash[:success] = 'お帰りなさい'
-      redirect_to root_url
+      flash[:success] = user.name + 'さん、お帰りなさい'
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+      redirect_to user
     else
-      flash.now[:danger] = 'メールアドレス/パスワードが間違っています'
-      render 'new'
+      flash[:danger] = 'メールアドレスorパスワードが間違っています'
+      redirect_to root_url
     end
   end
 
   def destroy
-    log_out
+    log_out if logged_in?
     redirect_to root_url
   end
 end

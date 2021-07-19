@@ -1,0 +1,53 @@
+<div class="user-view-box">
+  <div class="user-view-prof">
+    <div class="user-view-icon">
+      <% if @user.image_name? %>
+        <%= image_tag @user.image_name.url %>
+      <% else %>
+        <img src="<%= "/user_images/#{@user.image_name}" %>">
+      <% end %>
+    </div>
+    <div class="user-view-name">
+      <h3><%= @user.name %></h3>
+    </div>
+    <div class="stats">
+      <%= render 'shared/stats' %>
+    </div>
+    <div class="user-view-sns">
+      <ul class="profile-links">
+        <% if @user.twitter.present? %>
+          <li class="profile-link">
+            <%= link_to @user.twitter, target: :_blank do %>
+              <i class="fab fa-twitter-square"></i>
+            <% end %>
+          </li>
+        <% end %>
+        <% if @user.facebook.present? %>
+          <li class="profile-link">
+            <%= link_to @user.facebook, target: :_blank do %>
+              <i class="fab fa-facebook-square"></i>
+            <% end %>
+          </li>
+        <% end %>
+        <% if @user.instagram.present? %>
+          <li class="profile-link">
+            <%= link_to @user.instagram, target: :_blank do %>
+              <i class="fab fa-instagram"></i>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="update-contents">
+    <h3>自己紹介</h3>
+    <h3><%= @user.body %></h3>
+  </div>
+  <% if @user == current_user %>
+    <div class="edit-link-btn">
+      <%= link_to "編集", edit_user_path(@user), class: "btn btn-primary" %>
+    </div>
+  <% end %>
+  <%= render 'follow_form' if logged_in? %>
+  <%= link_to 'いいね一覧', likes_user_path(@user) %>
+</div>

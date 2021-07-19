@@ -26,9 +26,10 @@
                     <p>三</p>
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuBotton">
-                    <a class="dropdown-item"><%= link_to "投稿する", posts_new_path %></a><br>
-                    <a class="dropdown-item"><%= link_to "投稿一覧", index_path %></a><br>
-                    <a class="dropdown-item"><%= link_to "設定", @current_user %></a><br>
+                    <a class="dropdown-item"><%= link_to "投稿する", new_post_path %></a><br>
+                    <a class="dropdown-item"><%= link_to "アカウント", @current_user %></a><br>
+                    <a class="dropdown-item"><%= link_to "編集", edit_user_path(@current_user) %></a><br>
+                    <a class="dropdown-item"><%= link_to "ユーザー一覧", users_path %></a><br>
                     <a class="dropdown-item"><%= link_to "ログアウト", logout_path, method: :delete %></a>
                   </div>
                 </div>

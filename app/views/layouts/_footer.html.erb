@@ -1,5 +1,44 @@
 <footer>
   <div class="container">
-    <h3>Napier</h3>
+    <nav class="footer-nav">
+      <%= link_to posts_post_ranking_path do %>
+        <li class="footer-item">
+          <i class="fas fa-crown footer-icon"></i><br>
+          <span>人気投稿ランキング</span>
+        </li>
+      <% end %>
+      <%=  link_to companies_path do %>
+        <li class="footer-item">
+          <i class="far fa-building footer-icon"></i><br>
+          <span>企業一覧</span>
+        </li>
+      <% end%>
+      <%= link_to about_path do %>
+        <li class="footer-item">
+          <i class="fab fa-adn footer-icon"></i><br>
+          <span>Naiperとは</span>
+      </li>
+      <% end %>
+      <li class="footer-item">
+        <i class="fas fa-home footer-icon"></i><br>
+        <%= link_to '企業概要', '#' %>
+      </li>
+      <li class="footer-item">
+        <i class="fas fa-question footer-icon"></i><br>
+        <%= link_to 'ヘルプ', '#' %>
+      </li>
+      <li class="footer-item">
+        <i class="fas fa-map-marker-alt footer-icon"></i><br>
+        <%= link_to '所在地', '#' %>
+      </li>
+      <li class="footer-item">
+        <i class="fas fa-male footer-icon"></i><br>
+        <%= link_to '開発者', '#' %>
+      </li>
+      <li class="footer-item">
+        <i class="fas fa-users-cog footer-icon"></i><br>
+        <%= link_to '利用規約', '#' %>
+      </li>
+    </nav>
   </div>
 </footer>
